@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Submit Answers</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <h3>{{ question.question_text }}</h3>
+                    <label for="first_answer_{{ question.id }}">First Answer:</label>
+                    <input for="yes_{{ question.id }}" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
+                    <label for="yes_{{ question.id }}">Ναι</label>
+                    <input for="no_{{ question.id }}" type="radio" name="first_answer_{{ question.id }}" value="Όχι">
+                    <label for="no_{{ question.id }}">Όχι</label><br>
+                    <label for="second_answer_{{ question.id }}">Second Answer:</label>
+                    <input type="radio" name="second_answer_{{ question.id }}" value="Όχι">
+                    <label for="no_{{ question.id }}">Όχι</label>
+                    <input type="radio" name="second_answer_{{ question.id }}" value="Μερικώς">
+                    <label for="medium_{{ question.id }}">Μερικώς</label>
+                    <input type="radio" name="second_answer_{{ question.id }}" value="Πλήρως">
+                    <label for="full_{{ question.id }}">Πλήρως</label><br>
+                    <label for="notes_{{ question.id }}">Notes:</label>
+                    <input type="text" name="notes_{{ question.id }}"><br>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit"><a class="navbar-link" href="{% url 'poll:user_answers' %}">Submit</a></button>
+    </form>
+</body>
+</html>

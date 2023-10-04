@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a class='navbar-brand' href="{% url 'index' %}">kentro hmeras</a></li>
+          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a class="navbar-link" href="{% url 'poll:register' %}">Register</a></li>
+          <li><a class="navbar-link" href="{% url 'poll:questions' %}">δημιουργια ασθενη και Ερωτηματολογιο</a></li>
+          <li><a class="navbar-link" href="{% url 'poll:saved_patients' %}">saved_patients</a></li>
+
+          {% if user.is_authenticated %}
+          <li><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
+
+          {% else %}
+          <li><a class="navbar-link" href="{% url 'poll:user_login' %}">Login</a></li>
+
+          {% endif %}
+
+
+        </ul>
+      </div>
+
+    </nav>
+    <div class="container">
+
+      {% block body_block %}
+      {% endblock %}
+
+    </div>
+
+
+
+  </body>
+</html>

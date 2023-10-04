@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Choices</title>
+</head>
+<body>
+  {% csrf_token %}
+    <h1>Απαντήσεις του Ασθενούς {{ patient.IDENTITY }}</h1>
+
+    {% if patient_choices %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ερώτηση</th>
+                    <th>Πρώτη Απάντηση</th>
+                    <th>Δεύτερη Απάντηση</th>
+                    <th>Σημειώσεις</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for choice in patient_choices %}
+                    <tr>
+                        <td>{{ choice.question.question_text }}</td>
+                        <td>{{ choice.first_answer }}</td>
+                        <td>{{ choice.second_answer }}</td>
+                        <td>{{ choice.notes }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Ο ασθενής δεν έχει δώσει ακόμη απαντήσεις.</p>
+    {% endif %}
+</body>
+</html>

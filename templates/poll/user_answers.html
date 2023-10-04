@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Answers</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body class="container">
+    <h1>User Answers</h1>
+
+    <ul>
+      <form method="post">
+        {% csrf_token %}
+        {% for choice in user_choices %}
+            <div class="jumbotron">
+                <p><strong>Question:</strong> {{ choice.question.question_text }}</p>
+                <p><strong>First Answer:</strong> {{ choice.first_answer }}</p>
+                <p><strong>Second Answer:</strong> {{ choice.second_answer }}</p>
+                <p><strong>Notes:</strong> {{ choice.notes }}</p>
+            </div>
+        {% endfor %}
+      </form>
+    </ul>
+    <a class="navbar-link" href="{% url 'poll:user_answers' %}">Submit</a>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questions</title>
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+
+</head>
+
+<body class="container" >
+
+    <h1>Ερωτηματολογιο:</h1>
+    <form method="post" action="{% url 'poll:submit_answers' %}">
+      <div class="jumbotron border border-danger">
+        <label for="IDENTITY">IDENTITY:</label>
+        <input type="text" id="IDENTITY" name="IDENTITY"><br>
+        <label for="EDUCCATEGORY">EDUCCATEGORY:</label>
+        <input type="text" id="EDUCCATEGORY" name="EDUCCATEGORY"><br>
+        <label for="EDUCPATIENT">EDUCPATIENT:</label>
+        <input type="text" id="EDUCPATIENT" name="EDUCPATIENT"><br>
+        <label for="SEXPATIENT">SEXPATIENT:</label>
+        <input type="text" id="SEXPATIENT" name="SEXPATIENT"><br>
+        <label for="AGEPATIENT">AGEPATIENT:</label>
+        <input type="text" id="AGEPATIENT" name="AGEPATIENT"><br>
+        <label for="ECUCCARERCAT">ECUCCARERCAT:</label>
+        <input type="text" id="ECUCCARERCAT" name="ECUCCARERCAT"><br>
+        <label for="EDUCCARER">EDUCCARER:</label>
+        <input type="text" id="EDUCCARER" name="EDUCCARER"><br>
+        <label for="SEXCARER">SEXCARER:</label>
+        <input type="text" id="SEXCARER" name="SEXCARER"><br>
+        <label for="AGECARER">AGECARER:</label>
+        <input type="text" id="AGECARER" name="AGECARER"><br>
+        <label for="RELATIONSHIPCARER">RELATIONSHIPCARER:</label>
+        <input type="text" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER"><br>
+        <label for="LIVESIN">LIVESIN:</label>
+        <input type="text" id="LIVESIN" name="LIVESIN"><br>
+        <label for="kentro">kentro:</label>
+        <input type="text" id="kentro" name="kentro"><br>
+        <label for="date">date:</label>
+        <input type="text" id="date" name="date"><br>
+        <label for="NPI">NPI:</label>
+        <input type="text" id="NPI" name="NPI"><br>
+        <label for="STAGE">STAGE:</label>
+        <input type="text" id="STAGE" name="STAGE"><br>
+        <label for="IADL">IADL:</label>
+        <input type="text" id="IADL" name="IADL"><br>
+        <label for="MMSE">MMSE:</label>
+        <input type="text" id="MMSE" name="MMSE"><br>
+      </div>
+        {% csrf_token %}
+        <ul>
+            {% for question in questions %}
+                <li>
+                  <div class="jumbotron" style="width:800px; height:500px; ">
+                    {{ question.question_text }}
+                  <div class="form-check">
+                    <label class="form-ckeck-label"  for="yes">Ναι</label>
+                    <input id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
+                    <label class="form-ckeck-label"  for="NO">Όχι</label>
+                    <input id="NO" type="radio" name="first_answer_{{ question.id }}" value="Όχι">
+                  </div>
+
+                  <h3>Αν ναι, καλύπτεται η ανάγκη;</h3>
+
+                  <div class="form-check">
+                    <label class="form-ckeck-label"  for="No">Όχι</label>
+                    <input id="No" type="radio" name="second_answer_{{ question.id }}" value="Όχι">
+                    <label class="form-ckeck-label"  for="Medium">Μερικώς</label>
+                    <input id="Medium" type="radio" name="second_answer_{{ question.id }}" value="Μερικώς">
+                    <label class="form-ckeck-label"  for="Full">Πλήρως</label>
+                    <input id="Full" type="radio" name="second_answer_{{ question.id }}" value="Πλήρως"><br>
+                    <label for="textbox">Σημειώσεις:</label>
+                    <input type="text" id="textbox" name="notes_{{ question.id }}" style="width:80%; height:200px;">
+                  </div>
+                  </div>
+
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+        <button type="submit"><a class="navbar-link">Submit</a></button>
+    </form>
+</body>
+</html>

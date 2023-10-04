@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    {% csrf_token %}
+
+    {% for patient in patients %}
+    <div class="">
+
+
+      <a class="" href="{% url 'poll:patient_choices' %}?id={{ patient.id }}">
+        {{ patient }}
+
+
+
+
+      </a>
+    </div>
+
+    {% endfor %}
+
+
+
+  </body>
+</html>
