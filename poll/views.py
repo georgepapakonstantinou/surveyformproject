@@ -265,3 +265,7 @@ def patient_choices(request):
             return render(request, 'poll/patient_not_found.html')
 
     return render(request, 'poll/patient_choices.html')
+
+
+def demo(request):
+    return render(request,'poll/demo.html')

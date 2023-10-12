@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Questions</title>
@@ -10,11 +10,17 @@
 
 </head>
 
-<body class="container" >
+<body class="" > -->
+{% extends "poll/base.html" %}
+{% load static %}
 
+{% block body_block %}
     <h1>Ερωτηματολογιο:</h1>
     <form method="post" action="{% url 'poll:submit_answers' %}">
-      <div class="jumbotron border border-danger">
+      
+
+      <div class="jumbotron border border-danger" style="background-color: #ADD8E6; color: #414a7e;">
+        <h1>Συμπληρώστε τα στοιχεία του ασθενή</h1>
         <label for="IDENTITY">IDENTITY:</label>
         <input type="text" id="IDENTITY" name="IDENTITY"><br>
         <label for="EDUCCATEGORY">EDUCCATEGORY:</label>
@@ -51,11 +57,11 @@
         <input type="text" id="MMSE" name="MMSE"><br>
       </div>
         {% csrf_token %}
-        <ul>
+        <ol>
             {% for question in questions %}
                 <li>
-                  <div class="jumbotron" style="width:800px; height:500px; ">
-                    {{ question.question_text }}
+                  <div class="jumbotron" style="background-color: #ADD8E6; color: #414a7e;">
+                    {{ question.question_text|linebreaksbr }}
                   <div class="form-check">
                     <label class="form-ckeck-label"  for="yes">Ναι</label>
                     <input id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
@@ -80,8 +86,10 @@
                 </li>
                 <br>
             {% endfor %}
-        </ul>
+        </ol>
         <button type="submit"><a class="navbar-link">Submit</a></button>
     </form>
-</body>
-</html>
+<!-- </body>
+</html> -->
+
+{% endblock %}

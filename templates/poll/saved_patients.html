@@ -3,22 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'poll/css/style.css' %}">
+
   </head>
-  <body>
+  <body class="">
+
+    <h1 class="display-4" style="color:#3498db;">Αποθηκευμένοι ασθενείς</h1>
 
     {% csrf_token %}
 
-    {% for patient in patients %}
+
     <div class="">
+      {% for patient in patients %}
+
+      <ol class="list-group">
+        <a class="text-dark" href="{% url 'poll:patient_choices' %}?id={{ patient.id }}">
+          <li class="list-group-item list-group-item-action badge rounded-pill">
+
+              {{ patient }}
+
+            </li>
+        </a>
 
 
-      <a class="" href="{% url 'poll:patient_choices' %}?id={{ patient.id }}">
-        {{ patient }}
+      </ol>
 
-
-
-
-      </a>
     </div>
 
     {% endfor %}

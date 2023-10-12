@@ -14,7 +14,8 @@ urlpatterns=[
     path('user_answers/', views.user_answers, name='user_answers'),
     path('create_patient/',views.create_patient, name='create_patient'),
     path('saved_patients/',views.saved_patients, name='saved_patients'),
-    path('patient_choices',views.patient_choices, name='patient_choices')
+    path('patient_choices',views.patient_choices, name='patient_choices'),
+    path('demo',views.demo,name='demo')
 
 
 ]

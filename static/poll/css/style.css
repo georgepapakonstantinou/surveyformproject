@@ -1,0 +1,58 @@
+/* Καθορισμός στυλ για το board και τα links */
+.navbar-nav {
+  display: flex;
+  background-color: #e3f2fd;
+  padding: 10px;
+  /*border: 2px solid #007bff; /* Χρώμα περιγράμματος του board */
+}
+
+.navbar-nav li {
+  margin-right: 15px; /* Απόσταση μεταξύ των links */
+}
+
+/* Καθορισμός στυλ για τα links στη navbar */
+.navbar-nav li a {
+  color: #428271;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hover effect: Αλλαγή χρώματος κατά το hover */
+.navbar-nav li a:hover {
+  color: #007bff;
+}
+
+/* Καθορισμός στυλ για το ενεργό link */
+.navbar-nav li a.active {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.navbar-nav li a.navbar-brand {
+  color: #4CAF50; /* Χρώμα πράσινου */
+  font-weight: bold;
+}
+
+.navbar-nav li a.navbar-brand:hover {
+  color: #45a049; /* Χρώμα πράσινου κατά το hover */
+}
+
+/* Καθορισμός στυλ για τη λίστα ασθενών */
+.patient-list {
+  list-style-type: none; /* Αφαίρεση του default bullet της λίστας */
+  padding: 0; /* Αφαίρεση περιθωρίων από τη λίστα */
+}
+
+/* Καθορισμός στυλ για κάθε ασθενή στη λίστα */
+.patient-list-item {
+  margin-bottom: 8px; /* Απόσταση ανάμεσα σε κάθε ασθενή */
+  padding: 2px; /* Περιθώρια του "board" γύρω από τον ασθενή */
+  border: 1px solid #4CAF50; /* Χρώμα περιγράμματος του "board" (πράσινο) */
+  border-radius: 5px; /* Γωνίες του "board" */
+  background-color: #bbf0f2;
+}
+
+
+.body-color {
+  background-color:#bbf0f2;
+}

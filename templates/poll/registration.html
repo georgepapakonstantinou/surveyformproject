@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body_block %}
-<div class="jumbotron">
+<div class="jumbotron bg-info">
   {% if registered %}
   <h1>THANK YOU</h1>
 
@@ -14,7 +14,7 @@
     {% csrf_token %}
     {{ user_form.as_p }}
   <!-- {{ profile_form.as_p }} -->
-    <input type="submit" name="" value="Register">
+    <input class="btn btn-success" type="submit" name="" value="Register">
   </form>
 
   {% endif %}

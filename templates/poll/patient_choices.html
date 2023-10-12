@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Choices</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'poll/css/style.css' %}">
+
 </head>
-<body>
+<body class="bg-info">
   {% csrf_token %}
     <h1>Απαντήσεις του Ασθενούς {{ patient.IDENTITY }}</h1>
 
     {% if patient_choices %}
-        <table border="1">
+        <table class="table table-striped table-hover" border="1">
             <thead>
                 <tr>
                     <th>Ερώτηση</th>
@@ -22,7 +28,7 @@
             <tbody>
                 {% for choice in patient_choices %}
                     <tr>
-                        <td>{{ choice.question.question_text }}</td>
+                        <td>{{ choice.question.question_text|linebreaksbr }}</td>
                         <td>{{ choice.first_answer }}</td>
                         <td>{{ choice.second_answer }}</td>
                         <td>{{ choice.notes }}</td>
