@@ -1,2 +1,2 @@
 .git-credentials
-poll/__pycache__/**
+*/__pycache__
