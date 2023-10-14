@@ -17,44 +17,65 @@
 {% block body_block %}
     <h1>Ερωτηματολογιο:</h1>
     <form method="post" action="{% url 'poll:submit_answers' %}">
-      
+
 
       <div class="jumbotron border border-danger" style="background-color: #ADD8E6; color: #414a7e;">
         <h1>Συμπληρώστε τα στοιχεία του ασθενή</h1>
-        <label for="IDENTITY">IDENTITY:</label>
-        <input type="text" id="IDENTITY" name="IDENTITY"><br>
-        <label for="EDUCCATEGORY">EDUCCATEGORY:</label>
-        <input type="text" id="EDUCCATEGORY" name="EDUCCATEGORY"><br>
-        <label for="EDUCPATIENT">EDUCPATIENT:</label>
-        <input type="text" id="EDUCPATIENT" name="EDUCPATIENT"><br>
-        <label for="SEXPATIENT">SEXPATIENT:</label>
-        <input type="text" id="SEXPATIENT" name="SEXPATIENT"><br>
-        <label for="AGEPATIENT">AGEPATIENT:</label>
-        <input type="text" id="AGEPATIENT" name="AGEPATIENT"><br>
-        <label for="ECUCCARERCAT">ECUCCARERCAT:</label>
-        <input type="text" id="ECUCCARERCAT" name="ECUCCARERCAT"><br>
-        <label for="EDUCCARER">EDUCCARER:</label>
-        <input type="text" id="EDUCCARER" name="EDUCCARER"><br>
-        <label for="SEXCARER">SEXCARER:</label>
-        <input type="text" id="SEXCARER" name="SEXCARER"><br>
-        <label for="AGECARER">AGECARER:</label>
-        <input type="text" id="AGECARER" name="AGECARER"><br>
-        <label for="RELATIONSHIPCARER">RELATIONSHIPCARER:</label>
-        <input type="text" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER"><br>
-        <label for="LIVESIN">LIVESIN:</label>
-        <input type="text" id="LIVESIN" name="LIVESIN"><br>
-        <label for="kentro">kentro:</label>
-        <input type="text" id="kentro" name="kentro"><br>
-        <label for="date">date:</label>
-        <input type="text" id="date" name="date"><br>
-        <label for="NPI">NPI:</label>
-        <input type="text" id="NPI" name="NPI"><br>
-        <label for="STAGE">STAGE:</label>
-        <input type="text" id="STAGE" name="STAGE"><br>
-        <label for="IADL">IADL:</label>
-        <input type="text" id="IADL" name="IADL"><br>
-        <label for="MMSE">MMSE:</label>
-        <input type="text" id="MMSE" name="MMSE"><br>
+        <div class="form-group">
+
+          <label for="IDENTITY">IDENTITY:</label>
+          <input type="text" class="form-control" id="IDENTITY" name="IDENTITY"><br>
+
+
+          <label for="EDUCCATEGORY">EDUCCATEGORY:</label>
+          <input type="text" class="form-control" id="EDUCCATEGORY" name="EDUCCATEGORY"><br>
+
+          <label for="EDUCPATIENT">EDUCPATIENT:</label>
+          <input type="text" class="form-control" id="EDUCPATIENT" name="EDUCPATIENT"><br>
+
+          <label for="SEXPATIENT">SEXPATIENT:</label>
+          <input type="text" class="form-control" id="SEXPATIENT" name="SEXPATIENT"><br>
+
+          <label for="AGEPATIENT">AGEPATIENT:</label>
+          <input type="text" class="form-control" id="AGEPATIENT" name="AGEPATIENT"><br>
+
+          <label for="ECUCCARERCAT">ECUCCARERCAT:</label>
+          <input type="text" class="form-control" id="ECUCCARERCAT" name="ECUCCARERCAT"><br>
+
+          <label for="EDUCCARER">EDUCCARER:</label>
+          <input type="text" class="form-control" id="EDUCCARER" name="EDUCCARER"><br>
+
+          <label for="SEXCARER">SEXCARER:</label>
+          <input type="text" class="form-control" id="SEXCARER" name="SEXCARER"><br>
+
+          <label for="AGECARER">AGECARER:</label>
+          <input type="text" class="form-control" id="AGECARER" name="AGECARER"><br>
+
+          <label for="RELATIONSHIPCARER">RELATIONSHIPCARER:</label>
+          <input type="text" class="form-control" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER"><br>
+
+          <label for="LIVESIN">LIVESIN:</label>
+          <input type="text" class="form-control" id="LIVESIN" name="LIVESIN"><br>
+
+          <label for="kentro">kentro:</label>
+          <input type="text" class="form-control" id="kentro" name="kentro"><br>
+
+          <label for="date">date:</label>
+          <input type="text" class="form-control" id="date" name="date"><br>
+
+          <label for="NPI">NPI:</label>
+          <input type="text" class="form-control" id="NPI" name="NPI"><br>
+
+          <label for="STAGE">STAGE:</label>
+          <input type="text" class="form-control" id="STAGE" name="STAGE"><br>
+
+          <label for="IADL">IADL:</label>
+          <input type="text" class="form-control" id="IADL" name="IADL"><br>
+
+          <label for="MMSE">MMSE:</label>
+          <input type="text" class="form-control" id="MMSE" name="MMSE"><br>
+
+        </div>
       </div>
         {% csrf_token %}
         <ol>
@@ -89,6 +110,8 @@
         </ol>
         <button type="submit"><a class="navbar-link">Submit</a></button>
     </form>
+
+    
 <!-- </body>
 </html> -->
 
