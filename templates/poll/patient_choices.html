@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'poll/css/style.css' %}">
 
 </head>
-<body class="bg-info">
+<body class="container bg-info">
   {% csrf_token %}
     <h1>Απαντήσεις του Ασθενούς {{ patient.IDENTITY }}</h1>
 
@@ -28,7 +28,7 @@
             <tbody>
                 {% for choice in patient_choices %}
                     <tr>
-                        <td>{{ choice.question.question_text|linebreaksbr }}</td>
+                        <td>{{ choice.question.question_text|safe }}</td>
                         <td>{{ choice.first_answer }}</td>
                         <td>{{ choice.second_answer }}</td>
                         <td>{{ choice.notes }}</td>
@@ -36,6 +36,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <a href="{% url 'poll:download_patient_choices_csv' patient.id %}" class="btn btn-primary" download>
+          Download CSV
+        </a>
     {% else %}
         <p>Ο ασθενής δεν έχει δώσει ακόμη απαντήσεις.</p>
     {% endif %}

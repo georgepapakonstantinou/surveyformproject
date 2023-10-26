@@ -19,70 +19,140 @@
     <form method="post" action="{% url 'poll:submit_answers' %}">
 
 
-      <div class="jumbotron border border-danger" style="background-color: #ADD8E6; color: #414a7e;">
+      <div class="jumbotron border border-success" style="background-color: #ADD8E6; color: #414a7e;">
         <h1>Συμπληρώστε τα στοιχεία του ασθενή</h1>
         <div class="form-group">
 
-          <label for="IDENTITY">IDENTITY:</label>
+          <label for="IDENTITY">Identity:</label>
           <input type="text" class="form-control" id="IDENTITY" name="IDENTITY"><br>
 
 
-          <label for="EDUCCATEGORY">EDUCCATEGORY:</label>
-          <input type="text" class="form-control" id="EDUCCATEGORY" name="EDUCCATEGORY"><br>
+          <label for="EDUCCATEGORY">Category of Education:</label>
+          <select class="form-control" type="text" id="EDUCCATEGORY" name="EDUCCATEGORY">
+            <option> </option>
+            <option>0-6</option>
+            <option>7-12</option>
+            <option>13+</option>
+          </select><br>
 
-          <label for="EDUCPATIENT">EDUCPATIENT:</label>
+          <label for="EDUCPATIENT">Education of Patient:</label>
           <input type="text" class="form-control" id="EDUCPATIENT" name="EDUCPATIENT"><br>
 
-          <label for="SEXPATIENT">SEXPATIENT:</label>
-          <input type="text" class="form-control" id="SEXPATIENT" name="SEXPATIENT"><br>
+          <label for="SEXPATIENT">Sex of Patient:</label>
+          <select class="form-control" type="text" id="SEXPATIENT" name="SEXPATIENT">
+            <option> </option>
+            <option>Male</option>
+            <option>Female</option>
+          </select><br>
 
-          <label for="AGEPATIENT">AGEPATIENT:</label>
+          <label for="AGEPATIENT">Age of Patient:</label>
           <input type="text" class="form-control" id="AGEPATIENT" name="AGEPATIENT"><br>
 
-          <label for="ECUCCARERCAT">ECUCCARERCAT:</label>
-          <input type="text" class="form-control" id="ECUCCARERCAT" name="ECUCCARERCAT"><br>
+          <label for="ECUCCARERCAT">Carer's category of education:</label>
+          <select type="text" class="form-control" id="ECUCCARERCAT" name="ECUCCARERCAT">
+            <option> </option>
+            <option>0-6</option>
+            <option>7-12</option>
+            <option>13+</option>
+          </select><br>
 
-          <label for="EDUCCARER">EDUCCARER:</label>
+          <label for="EDUCCARER">Education of Carer:</label>
           <input type="text" class="form-control" id="EDUCCARER" name="EDUCCARER"><br>
 
-          <label for="SEXCARER">SEXCARER:</label>
-          <input type="text" class="form-control" id="SEXCARER" name="SEXCARER"><br>
+          <label for="SEXCARER">Sex of Carer:</label>
+          <select class="form-control" type="text" id="SEXCARER" name="SEXCARER">
+            <option> </option>
+            <option>Male</option>
+            <option>Female</option>
 
-          <label for="AGECARER">AGECARER:</label>
+          </select><br>
+          <label for="AGECARER">Age of Carer:</label>
           <input type="text" class="form-control" id="AGECARER" name="AGECARER"><br>
 
-          <label for="RELATIONSHIPCARER">RELATIONSHIPCARER:</label>
-          <input type="text" class="form-control" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER"><br>
+          <label for="RELATIONSHIPCARER">Relationship between patient and caregiver:</label>
+          <select type="text" class="form-control" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER">
+            <option> </option>
+            <option>SPOUSE</option>
+            <option>CHILDREN</option>
+            <option>PROFESSIONAL</option>
+            <option>OTHER</option>
+          </select><br>
 
-          <label for="LIVESIN">LIVESIN:</label>
-          <input type="text" class="form-control" id="LIVESIN" name="LIVESIN"><br>
+          <label for="LIVESIN">LIVES IN:</label>
+          <select type="text" class="form-control" id="LIVESIN" name="LIVESIN">
+            <option> </option>
+            <option>CITY</option>
+            <option>VILLAGE</option>
+          </select><br>
 
           <label for="kentro">kentro:</label>
-          <input type="text" class="form-control" id="kentro" name="kentro"><br>
+          <select type="text" class="form-control" id="kentro" name="kentro">
+            <option> </option>
+            <option>IOANNINA</option>
+            <option>LARISA</option>
+            <option>ALEXANDROUPOLH</option>
+          </select><br>
 
           <label for="date">date:</label>
-          <input type="text" class="form-control" id="date" name="date"><br>
+          <input type="date" class="form-control" id="date" name="date"><br>
 
           <label for="NPI">NPI:</label>
           <input type="text" class="form-control" id="NPI" name="NPI"><br>
 
           <label for="STAGE">STAGE:</label>
-          <input type="text" class="form-control" id="STAGE" name="STAGE"><br>
+          <select type="text" class="form-control" id="STAGE" name="STAGE">
+            <option> </option>
+            <option>MILD</option>
+            <option>MODERATE</option>
+            <option>SEVERE</option>
+          </select><br>
 
           <label for="IADL">IADL:</label>
           <input type="text" class="form-control" id="IADL" name="IADL"><br>
 
           <label for="MMSE">MMSE:</label>
-          <input type="text" class="form-control" id="MMSE" name="MMSE"><br>
+          <select type="text" class="form-control" id="MMSE" name="MMSE">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+          </select><br>
 
         </div>
       </div>
         {% csrf_token %}
-        <ol>
+        <ul>
             {% for question in questions %}
                 <li>
                   <div class="jumbotron" style="background-color: #ADD8E6; color: #414a7e;">
-                    {{ question.question_text|linebreaksbr }}
+                    {{ question.question_text|safe }}
                   <div class="form-check">
                     <label class="form-ckeck-label"  for="yes">Ναι</label>
                     <input id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
@@ -107,11 +177,11 @@
                 </li>
                 <br>
             {% endfor %}
-        </ol>
+        </ul>
         <button type="submit"><a class="navbar-link">Submit</a></button>
     </form>
 
-    
+
 <!-- </body>
 </html> -->
 

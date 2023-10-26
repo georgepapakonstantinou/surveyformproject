@@ -19,6 +19,7 @@ class UserProfileInfo(models.Model):
 
 class Patient(models.Model):
 
+
     IDENTITY = models.CharField(max_length=10,null=True)
     EDUCCATEGORY = models.CharField(max_length=100,null=True)
     EDUCPATIENT = models.CharField(max_length=100,null=True)
@@ -36,6 +37,7 @@ class Patient(models.Model):
     STAGE = models.CharField(max_length=100,null=True)
     IADL = models.CharField(max_length=100,null=True)
     MMSE = models.CharField(max_length=100,null=True)
+    DOCTOR = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f"{self.IDENTITY}"
@@ -43,7 +45,7 @@ class Patient(models.Model):
 
 
 class Question(models.Model):
-    question_text = models.CharField(max_length=500)
+    question_text = models.CharField(max_length=750)
 
     def __str__(self):
         return self.question_text

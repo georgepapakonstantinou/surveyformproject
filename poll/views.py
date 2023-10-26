@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from poll.forms import UserForm,UserProfileInfoForm
 
 from django.contrib.auth import authenticate,login,logout
@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Question,Choice,Patient
+import csv
 
 
 def index(request):
@@ -120,6 +121,7 @@ def submit_answers(request):
         MMSE = request.POST.get(f'MMSE')
 
         patient = Patient(
+        DOCTOR = request.user,
         IDENTITY = IDENTITY,
         EDUCCATEGORY = EDUCCATEGORY,
         EDUCPATIENT = EDUCPATIENT,
@@ -140,8 +142,12 @@ def submit_answers(request):
         )
         patient.save()
 
+        #doctor=request.user
+        #patients = Patient.objects.filter(DOCTOR=doctor)
+
+
         questions = Question.objects.all()
-        Choice.objects.filter(user=request.user).delete()
+        #Choice.objects.filter(user=request.user).delete()
 
         for question in questions:
             first_answer = request.POST.get(f'first_answer_{question.id}')
@@ -238,7 +244,7 @@ def create_patient(request):
 
 
 def saved_patients(request):
-    all_patients = Patient.objects.all()
+    all_patients = Patient.objects.filter(DOCTOR=request.user)
     context = {
         'patients': all_patients
     }
@@ -269,3 +275,41 @@ def patient_choices(request):
 
 def demo(request):
     return render(request,'poll/demo.html')
+
+
+def search_patients(request):
+    search_query = request.GET.get('IDENTITY', '')
+    patients = Patient.objects.filter(IDENTITY=search_query)
+
+    return render(request, 'poll/saved_patients.html',{'patients':patients})
+
+
+
+
+
+def download_patient_choices_csv(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    patient_choices = Choice.objects.filter(patient=patient)
+
+    # Ορίζουμε το όνομα του αρχείου CSV
+    csv_filename = f'patient_{patient.id}_choices.csv'
+
+    # Δημιουργία αρχείου CSV
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="{csv_filename}"'
+
+    # Δημιουργία του writer για την εγγραφή στο αρχείο CSV
+    csv_writer = csv.writer(response)
+    csv_writer.writerow(['Question', 'First Answer', 'Second Answer', 'Notes'])
+
+    # Εγγραφή των δεδομένων του ασθενούς και των επιλογών του στο αρχείο CSV
+    for choice in patient_choices:
+
+        csv_writer.writerow([
+            choice.question.question_text,
+            choice.first_answer,
+            choice.second_answer,
+            choice.notes,
+        ])
+
+    return response
