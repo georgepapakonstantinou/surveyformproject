@@ -40,6 +40,10 @@
     </div>
 
     {% endfor %}
+    <br>
+    <a href="{% url 'poll:download_all' %}" class="btn btn-primary" download>
+      Download CSV For All
+    </a>
 
 
   </body>

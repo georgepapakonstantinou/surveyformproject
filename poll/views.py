@@ -313,3 +313,69 @@ def download_patient_choices_csv(request, patient_id):
         ])
 
     return response
+
+def download_all(request):
+    patients = Patient.objects.filter(DOCTOR=request.user)
+
+
+    csv_filename = 'all_patients'
+
+    responce = HttpResponse(content_type='text/csv')
+    responce['Content-Disposition'] = f'attachment; filename="{csv_filename}"'
+
+    csv_writer = csv.writer(responce)
+    header_row = ['Identity',
+    'Category of Education',
+    'Education of Patient',
+    'Sex of Patient',
+    'Age of Patient',
+    'Carer category of education',
+    'Education of Carer',
+    'Sex of Carer',
+    'Age of Carer',
+    'Relationship between patient and caregiver',
+    'LIVES IN',
+    'kentro',
+    'date',
+    'NPI',
+    'STAGE',
+    'IADL',
+    'MMSE']
+
+    questions = Question.objects.all()
+    for q in questions:
+        header_row.extend([f'{q.question_text[:3]} - First Answer', f'- Second Answer', f'- Notes'])
+    csv_writer.writerow(header_row)
+
+
+
+    for patient in patients:
+        patient_choices = Choice.objects.filter(patient=patient)
+        row = [patient.IDENTITY,
+        patient.EDUCCATEGORY,
+        patient.EDUCPATIENT,
+        patient.SEXPATIENT,
+        patient.AGEPATIENT,
+        patient.ECUCCARERCAT,
+        patient.EDUCCARER,
+        patient.SEXCARER,
+        patient.AGECARER,
+        patient.RELATIONSHIPCARER,
+        patient.LIVESIN,
+        patient.kentro,
+        patient.date,
+        patient.NPI,
+        patient.STAGE,
+        patient.IADL,
+        patient.MMSE]
+
+        for q in questions:
+            choice = patient_choices.filter(question=q).first()
+            if choice:
+                row.extend([choice.first_answer, choice.second_answer, choice.notes])
+            else:
+                row.extend(['', '', ''])
+        csv_writer.writerow(row)
+
+
+    return responce

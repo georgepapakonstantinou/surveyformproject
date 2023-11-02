@@ -18,6 +18,7 @@ urlpatterns=[
     path('demo',views.demo,name='demo'),
     path('search_patients',views.search_patients, name='search_patients'),
     path('download_patient_choices_csv/<int:patient_id>/', views.download_patient_choices_csv, name='download_patient_choices_csv'),
+    path('download_all', views.download_all, name='download_all'),
 
 
 ]
