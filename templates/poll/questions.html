@@ -155,20 +155,20 @@
                     {{ question.question_text|safe }}
                   <div class="form-check">
                     <label class="form-ckeck-label"  for="yes">Ναι</label>
-                    <input id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
+                    <input onclick="enfunction({{ question.id }})" id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι">
                     <label class="form-ckeck-label"  for="NO">Όχι</label>
-                    <input id="NO" type="radio" name="first_answer_{{ question.id }}" value="Όχι">
+                    <input onclick="myfunction({{ question.id }})" id="NO" type="radio" name="first_answer_{{ question.id }}" value="Όχι">
                   </div>
 
                   <h3>Αν ναι, καλύπτεται η ανάγκη;</h3>
 
                   <div class="form-check">
                     <label class="form-ckeck-label"  for="No">Όχι</label>
-                    <input id="No" type="radio" name="second_answer_{{ question.id }}" value="Όχι">
+                    <input id="No_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Όχι">
                     <label class="form-ckeck-label"  for="Medium">Μερικώς</label>
-                    <input id="Medium" type="radio" name="second_answer_{{ question.id }}" value="Μερικώς">
+                    <input id="Medium_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Μερικώς">
                     <label class="form-ckeck-label"  for="Full">Πλήρως</label>
-                    <input id="Full" type="radio" name="second_answer_{{ question.id }}" value="Πλήρως"><br>
+                    <input id="Full_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Πλήρως"><br>
                     <label for="textbox">Σημειώσεις:</label>
                     <input type="text" id="textbox" name="notes_{{ question.id }}" style="width:80%; height:200px;">
                   </div>
@@ -181,7 +181,9 @@
         <button type="submit"><a class="navbar-link">Submit</a></button>
     </form>
 
+<!-- <script src="/home/p13papa1/git/surveyformproject/static/poll/json/myscript.js">
 
+</script> -->
 <!-- </body>
 </html> -->
 

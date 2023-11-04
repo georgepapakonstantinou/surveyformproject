@@ -114,7 +114,7 @@ def submit_answers(request):
         RELATIONSHIPCARER = request.POST.get(f'RELATIONSHIPCARER')
         LIVESIN = request.POST.get(f'LIVESIN')
         kentro = request.POST.get(f'kentro')
-        date = request.POST.get('date')
+        date = request.POST.get(f'date')
         NPI = request.POST.get(f'NPI')
         STAGE = request.POST.get(f'STAGE')
         IADL = request.POST.get(f'IADL')
@@ -306,7 +306,7 @@ def download_patient_choices_csv(request, patient_id):
     for choice in patient_choices:
 
         csv_writer.writerow([
-            choice.question.question_text,
+            choice.question.question_text[:3],
             choice.first_answer,
             choice.second_answer,
             choice.notes,
