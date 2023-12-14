@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Question,Choice,Patient
 import csv
+from datetime import datetime
 
 
 def index(request):
@@ -242,7 +243,7 @@ def create_patient(request):
 
     return render(request, 'poll/patient.html')
 
-
+@login_required
 def saved_patients(request):
     all_patients = Patient.objects.filter(DOCTOR=request.user)
     context = {
@@ -351,6 +352,7 @@ def download_all(request):
 
     for patient in patients:
         patient_choices = Choice.objects.filter(patient=patient)
+
         row = [patient.IDENTITY,
         patient.EDUCCATEGORY,
         patient.EDUCPATIENT,
