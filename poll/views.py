@@ -269,9 +269,34 @@ def patient_choices(request):
             return render(request, 'poll/patient_choices.html', context)
         except Patient.DoesNotExist:
             # Εάν ο ασθενής δεν βρεθεί, μπορείτε να χειριστείτε το λάθος εδώ.
-            return render(request, 'poll/patient_not_found.html')
+            return render(request, 'poll/saved_patients.html')
 
     return render(request, 'poll/patient_choices.html')
+
+
+
+def del_patient(request):
+    patient_id = request.GET.get('id', None)
+
+    if patient_id is not None:
+        patient = Patient.objects.get(id=patient_id)
+        patient_choices = Choice.objects.filter(patient=patient)
+
+        patient.delete()
+        patient_choices.delete()
+
+        all_patients = Patient.objects.filter(DOCTOR=request.user)
+        context = {
+            'patients': all_patients
+        }
+
+        return render(request, 'poll/saved_patients.html', context)
+
+    return render(request, 'poll/saved_patients.html')
+
+
+
+
 
 
 def demo(request):

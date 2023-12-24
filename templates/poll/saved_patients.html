@@ -8,9 +8,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'poll/css/style.css' %}">
 
   </head>
+
   <body class="">
 
-    <h1 class="display-4" style="color:#3498db;">Αποθηκευμένοι ασθενείς</h1>
+    <h1 class="display-4" style="color:#2083CE;">Αποθηκευμένοι ασθενείς</h1>
+
+
 
     {% csrf_token %}
 
@@ -44,6 +47,9 @@
     <a href="{% url 'poll:download_all' %}" class="btn btn-primary" download>
       Download CSV For All
     </a>
+
+      <h2><a href="{% url 'index' %}">Πίσω στο Κέντρο Ημέρας</a></h2>
+
 
 
   </body>
