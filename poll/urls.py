@@ -9,6 +9,8 @@ urlpatterns=[
     path('admin/', admin.site.urls),
     path('register/',views.register,name='register'),
     path('user_login/',views.user_login,name='user_login'),
+    path('special/',views.special,name='special'),
+    path('logout/',views.user_logout,name ='logout'),
     path('questions/',views.questions,name='questions'),
     path('submit_answers/',views.submit_answers,name='submit_answers'),
     path('user_answers/', views.user_answers, name='user_answers'),

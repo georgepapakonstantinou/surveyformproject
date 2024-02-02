@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from poll.models import UserProfileInfo,Question,Choice
+from poll.models import UserProfileInfo
 
 
 class UserForm(forms.ModelForm):
@@ -15,10 +15,3 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
         fields = ('portfolio_site','profile_pic')
-
-
-
-#class ChoiceForm(forms.ModelForm):
-    #class Meta:
-        #model = Choice
-        #fields = ['first_answer', 'second_answer', 'notes']

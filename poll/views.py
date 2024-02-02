@@ -404,5 +404,4 @@ def download_all(request):
                 row.extend(['', '', ''])
         csv_writer.writerow(row)
 
-
     return responce
