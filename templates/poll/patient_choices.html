@@ -42,6 +42,8 @@
         </a>
 
         <a class="btn btn-primary" href="{% url 'poll:del_patient' %}?id={{ patient.id }}">διαγραφή ασθενή</a>
+
+        <a class="btn btn-primary" href="{% url 'poll:edit_patient' patient.id %}">επεξεργασια στοιχειων</a>
     {% else %}
         <p>Ο ασθενής δεν έχει δώσει ακόμη απαντήσεις.</p>
     {% endif %}

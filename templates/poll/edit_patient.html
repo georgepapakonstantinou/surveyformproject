@@ -1,0 +1,194 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Questions</title>
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+
+</head>
+
+<body class="" > -->
+{% extends "poll/base.html" %}
+{% load static %}
+
+{% block body_block %}
+    <h1>Ερωτηματολογιο:</h1>
+    <form method="post" action="{% url 'poll:update_answers' %}">
+        {% csrf_token %}
+        <!-- {{ patient_form.as_p }} -->
+
+
+      <div class="jumbotron border border-success" style="background-color: #ADD8E6; color: #414a7e;">
+        <h1>Συμπληρώστε τα στοιχεία του ασθενή</h1>
+        <div class="form-group">
+
+          <input type="hidden" id="patient_id" name="patient_id" value="{{ patient.id }}"><br>
+
+          <label for="IDENTITY">Identity:</label>
+          <input type="text" class="form-control" id="IDENTITY" name="IDENTITY" value="{{ patient.IDENTITY }}"><br>
+
+
+          <label for="EDUCCATEGORY">Category of Education:</label>
+          <select class="form-control" type="text" id="EDUCCATEGORY" name="EDUCCATEGORY">
+            <option> </option>
+            <option {% if "0-6" in patient.EDUCCATEGORY %}selected{% endif %}>0-6</option>
+            <option {% if "7-12" in patient.EDUCCATEGORY %}selected{% endif %}>7-12</option>
+            <option {% if "13+" in patient.EDUCCATEGORY %}selected{% endif %}>13+</option>
+          </select><br>
+
+          <label for="EDUCPATIENT">Education of Patient:</label>
+          <input type="text" class="form-control" id="EDUCPATIENT" name="EDUCPATIENT" value="{{ patient.EDUCPATIENT }}"><br>
+
+          <label for="SEXPATIENT">Sex of Patient:</label>
+          <select class="form-control" type="text" id="SEXPATIENT" name="SEXPATIENT" value="{{ patient.SEXPATIENT }}">
+            <option> </option>
+            <option {% if "Male" in patient.SEXPATIENT %}selected{% endif %}>Male</option>
+            <option {% if "Female" in patient.SEXPATIENT %}selected{% endif %}>Female</option>
+          </select><br>
+
+          <label for="AGEPATIENT">Age of Patient:</label>
+          <input type="text" class="form-control" id="AGEPATIENT" name="AGEPATIENT" value="{{ patient.AGEPATIENT }}"><br>
+
+          <label for="ECUCCARERCAT">Carer's category of education:</label>
+          <select type="text" class="form-control" id="ECUCCARERCAT" name="ECUCCARERCAT" value="{{ patient.ECUCCARERCAT }}">
+            <option> </option>
+            <option {% if "0-6" in patient.EDUCCARERCAT %}selected{% endif %}>0-6</option>
+            <option {% if "7-12" in patient.EDUCCARERCAT %}selected{% endif %}>7-12</option>
+            <option {% if "13+" in patient.EDUCCARERCAT %}selected{% endif %}>13+</option>
+          </select><br>
+
+          <label for="EDUCCARER">Education of Carer:</label>
+          <input type="text" class="form-control" id="EDUCCARER" name="EDUCCARER" value="{{ patient.EDUCCARER }}"><br>
+
+          <label for="SEXCARER">Sex of Carer:</label>
+          <select class="form-control" type="text" id="SEXCARER" name="SEXCARER" value="{{ patient.SEXCARER }}">
+            <option> </option>
+            <option {% if "Male" in patient.SEXCARER %}selected{% endif %}>Male</option>
+            <option {% if "Female" in patient.SEXCARER %}selected{% endif %}>Female</option>
+
+          </select><br>
+          <label for="AGECARER">Age of Carer:</label>
+          <input type="text" class="form-control" id="AGECARER" name="AGECARER" value="{{ patient.AGECARER }}"><br>
+
+          <label for="RELATIONSHIPCARER">Relationship between patient and caregiver:</label>
+          <select type="text" class="form-control" id="RELATIONSHIPCARER" name="RELATIONSHIPCARER" value="{{ patient.RELATIONSHIPCARER }}">
+            <option> </option>
+            <option {% if "SPOUSE" in patient.RELATIONSHIPCARER %}selected{% endif %}>SPOUSE</option>
+            <option {% if "CHILDREN" in patient.RELATIONSHIPCARER %}selected{% endif %}>CHILDREN</option>
+            <option {% if "PROFESSIONAL" in patient.RELATIONSHIPCARER %}selected{% endif %}>PROFESSIONAL</option>
+            <option {% if "OTHER" in patient.RELATIONSHIPCARER %}selected{% endif %}>OTHER</option>
+          </select><br>
+
+          <label for="LIVESIN">LIVES IN:</label>
+          <select type="text" class="form-control" id="LIVESIN" name="LIVESIN" value="{{ patient.LIVESIN }}">
+            <option> </option>
+            <option {% if "CITY" in patient.LIVESIN %}selected{% endif %}>CITY</option>
+            <option {% if "VILLAGE" in patient.LIVESIN %}selected{% endif %}>VILLAGE</option>
+          </select><br>
+
+          <label for="kentro">kentro:</label>
+          <select type="text" class="form-control" id="kentro" name="kentro" value="{{ patient.kentro }}">
+            <option> </option>
+            <option {% if "IOANNINA" in patient.kentro %}selected{% endif %}>IOANNINA</option>
+            <option {% if "LARISA" in patient.kentro %}selected{% endif %}>LARISA</option>
+            <option {% if "ALEXANDROUPOLH" in patient.kentro %}selected{% endif %}>ALEXANDROUPOLH</option>
+          </select><br>
+
+          <label for="date">date:</label>
+          <input type="date" class="form-control" id="date" name="date" value="{{ patient.date }}"><br>
+
+          <label for="NPI">NPI:</label>
+          <input type="text" class="form-control" id="NPI" name="NPI" value="{{ patient.NPI }}"><br>
+
+          <label for="STAGE">STAGE:</label>
+          <select type="text" class="form-control" id="STAGE" name="STAGE" value="{{ patient.STAGE }}">
+            <option> </option>
+            <option {% if "MILD" in patient.STAGE %}selected{% endif %}>MILD</option>
+            <option {% if "MODERATE" in patient.STAGE %}selected{% endif %}>MODERATE</option>
+            <option {% if "SEVERE" in patient.STAGE %}selected{% endif %}>SEVERE</option>
+          </select><br>
+
+          <label for="IADL">IADL:</label>
+          <input type="text" class="form-control" id="IADL" name="IADL" value="{{ patient.IADL }}"><br>
+
+          <label for="MMSE">MMSE:</label>
+          <select type="text" class="form-control" id="MMSE" name="MMSE" value="{{ patient.MMSE }}">
+            <option {% if "1" in patient.MMSE %}selected{% endif %}>1</option>
+            <option {% if "2" in patient.MMSE %}selected{% endif %}>2</option>
+            <option {% if "3" in patient.MMSE %}selected{% endif %}>3</option>
+            <option {% if "4" in patient.MMSE %}selected{% endif %}>4</option>
+            <option {% if "5" in patient.MMSE %}selected{% endif %}>5</option>
+            <option {% if "6" in patient.MMSE %}selected{% endif %}>6</option>
+            <option {% if "7" in patient.MMSE %}selected{% endif %}>7</option>
+            <option {% if "8" in patient.MMSE %}selected{% endif %}>8</option>
+            <option {% if "9" in patient.MMSE %}selected{% endif %}>9</option>
+            <option {% if "10" in patient.MMSE %}selected{% endif %}>10</option>
+            <option {% if "11" in patient.MMSE %}selected{% endif %}>11</option>
+            <option {% if "12" in patient.MMSE %}selected{% endif %}>12</option>
+            <option {% if "13" in patient.MMSE %}selected{% endif %}>13</option>
+            <option {% if "14" in patient.MMSE %}selected{% endif %}>14</option>
+            <option {% if "15" in patient.MMSE %}selected{% endif %}>15</option>
+            <option {% if "16" in patient.MMSE %}selected{% endif %}>16</option>
+            <option {% if "17" in patient.MMSE %}selected{% endif %}>17</option>
+            <option {% if "18" in patient.MMSE %}selected{% endif %}>18</option>
+            <option {% if "19" in patient.MMSE %}selected{% endif %}>19</option>
+            <option {% if "20" in patient.MMSE %}selected{% endif %}>20</option>
+            <option {% if "21" in patient.MMSE %}selected{% endif %}>21</option>
+            <option {% if "22" in patient.MMSE %}selected{% endif %}>22</option>
+            <option {% if "23" in patient.MMSE %}selected{% endif %}>23</option>
+            <option {% if "24" in patient.MMSE %}selected{% endif %}>24</option>
+            <option {% if "25" in patient.MMSE %}selected{% endif %}>25</option>
+            <option {% if "26" in patient.MMSE %}selected{% endif %}>26</option>
+            <option {% if "27" in patient.MMSE %}selected{% endif %}>27</option>
+            <option {% if "28" in patient.MMSE %}selected{% endif %}>28</option>
+            <option {% if "29" in patient.MMSE %}selected{% endif %}>29</option>
+            <option {% if "30" in patient.MMSE %}selected{% endif %}>30</option>
+          </select><br>
+
+        </div>
+      </div>
+
+        <ul class="text-justify">
+
+            {% for question,answer_q1,answer_q2,notes in mylist %}
+
+                <li>
+                  <div class="jumbotron" style="background-color: #ADD8E6; color: #414a7e;">
+                    {{ question.question_text|safe }}
+                    {{ answer }}
+                  <div class="form-check">
+                    <label class="form-ckeck-label"  for="yes">Ναι</label>
+                    <input onclick="enfunction({{ question.id }})" id="yes" type="radio" name="first_answer_{{ question.id }}" value="Ναι" {% if answer_q1 == 'Ναι' %} checked {% endif %}>
+                    <label class="form-ckeck-label"  for="NO">Όχι</label>
+                    <input onclick="myfunction({{ question.id }})" id="NO" type="radio" name="first_answer_{{ question.id }}" value="Όχι" {% if answer_q1 == 'Όχι' %} checked {% endif %}>
+                  </div>
+
+                  <h3>Αν ναι, καλύπτεται η ανάγκη;</h3>
+
+                  <div class="form-check">
+                    <label class="form-ckeck-label"  for="No">Όχι</label>
+                    <input id="No_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Όχι" {% if answer_q2 == 'Όχι' %} checked {% endif %}>
+                    <label class="form-ckeck-label"  for="Medium">Μερικώς</label>
+                    <input id="Medium_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Μερικώς" {% if answer_q2 == 'Μερικώς' %} checked {% endif %}>
+                    <label class="form-ckeck-label"  for="Full">Πλήρως</label>
+                    <input id="Full_{{ question.id }}" type="radio" name="second_answer_{{ question.id }}" value="Πλήρως" {% if answer_q2 == 'Πλήρως' %} checked {% endif %}><br>
+                    <label for="textbox">Σημειώσεις:</label>
+                    <input type="text" id="textbox" name="notes_{{ question.id }}" style="width:80%; height:200px;" value="{{ notes }}">
+                  </div>
+                  </div>
+
+                </li>
+                <br>
+
+            {% endfor %}
+
+        </ul>
+        <button type="submit"><a class="navbar-link">Submit</a></button>
+    </form>
+
+
+
+{% endblock %}

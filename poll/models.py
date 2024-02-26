@@ -60,4 +60,5 @@ class Choice(models.Model):
 
 
     def __str__(self):
-        return f"{self.patient} answered question {self.question.id} : {self.first_answer}"
+        return str([self.question.id,self.first_answer,self.second_answer,self.notes])
+        #return f"{self.patient} answered question {self.question.id} : {self.first_answer} {self.second_answer} {self.notes}"

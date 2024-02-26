@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from poll.forms import UserForm,UserProfileInfoForm
-
+from poll.forms import UserForm,UserProfileInfoForm, PatientForm, ChoiceForm
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -405,3 +405,178 @@ def download_all(request):
         csv_writer.writerow(row)
 
     return responce
+
+
+
+
+@login_required
+def edit_patient(request, patient_id):
+    patient = get_object_or_404(Patient, pk=patient_id)
+    choices = Choice.objects.filter(patient=patient, user=request.user)
+    print(choices)
+    choices_dict = {choice.question_id: choice for choice in choices}
+    num_questions = 66
+
+    # Create a list to store the answers
+    answers_q1 = [''] * num_questions
+    answers_q2 = [''] * num_questions
+    answers_q3 = [''] * num_questions
+
+    # Populate the answer lists based on the data
+    for choice in choices:
+        question_id = choice.question_id
+        answers_q1[question_id - 1] = choice.first_answer
+        answers_q2[question_id - 1] = choice.second_answer
+        answers_q3[question_id - 1] = choice.notes
+
+
+    # Print or use the answer lists as needed
+    # print("Answers to the first question:", answers_q1)
+    # print("Answers to the second question:", answers_q2)
+    # print("Notes for the third question:", answers_q3)
+
+    answers_q1 = answers_q1[5:]
+    answers_q2 = answers_q2[5:]
+    answers_q3 = answers_q3[5:]
+    # print(answer_list)
+    # Υπολογίστε τον αριθμό των ερωτήσεων που έχετε στο template για να δημιουργήσετε τις αντίστοιχες επιλογές
+    #num_questions = len(Question.objects.all())
+
+
+
+    questions = Question.objects.all()
+    mylist = zip(questions,answers_q1,answers_q2,answers_q3)
+    return render(request, 'poll/edit_patient.html', {'patient': patient, 'questions': Question.objects.all(), 'mylist':mylist})
+
+
+def update_answers(request):
+
+
+
+    if request.method == 'POST':
+        patient_id = request.POST.get(f'patient_id')
+        patient = get_object_or_404(Patient, pk=patient_id)
+        patient.IDENTITY = request.POST.get(f'IDENTITY')
+        patient.EDUCCATEGORY = request.POST.get(f'EDUCCATEGORY')
+        patient.EDUCPATIENT = request.POST.get(f'EDUCPATIENT')
+        patient.SEXPATIENT = request.POST.get(f'SEXPATIENT')
+        patient.AGEPATIENT = request.POST.get(f'AGEPATIENT')
+        patient.ECUCCARERCAT = request.POST.get(f'ECUCCARERCAT')
+        patient.EDUCCARER = request.POST.get(f'EDUCCARER')
+        patient.SEXCARER = request.POST.get(f'SEXCARER')
+        patient.AGECARER = request.POST.get(f'AGECARER')
+        patient.RELATIONSHIPCARER = request.POST.get(f'RELATIONSHIPCARER')
+        patient.LIVESIN = request.POST.get(f'LIVESIN')
+        patient.kentro = request.POST.get(f'kentro')
+        patient.date = request.POST.get('date')
+        patient.NPI = request.POST.get(f'NPI')
+        patient.STAGE = request.POST.get(f'STAGE')
+        patient.IADL = request.POST.get(f'IADL')
+        patient.MMSE = request.POST.get(f'MMSE')
+
+
+
+        # patient = Patient(
+        # IDENTITY = IDENTITY,
+        # EDUCCATEGORY = EDUCCATEGORY,
+        # EDUCPATIENT = EDUCPATIENT,
+        # SEXPATIENT = SEXPATIENT,
+        # AGEPATIENT = AGEPATIENT,
+        # ECUCCARERCAT = ECUCCARERCAT,
+        # EDUCCARER = EDUCCARER,
+        # SEXCARER = SEXCARER,
+        # AGECARER = AGECARER,
+        # RELATIONSHIPCARER = RELATIONSHIPCARER,
+        # LIVESIN = LIVESIN,
+        # kentro = kentro,
+        # date = date,
+        # NPI	= NPI,
+        # STAGE = STAGE,
+        # IADL = IADL,
+        # MMSE = MMSE,
+        # )
+
+        patient.save()
+
+        # Επιπλέον, μπορείτε να επεξεργαστείτε και τις επιλογές του χρήστη
+        # από το ερωτηματολόγιο και να τις αποθηκεύσετε στο μοντέλο Choice.
+
+        # Παράδειγμα:
+
+        for question in Question.objects.all():
+            first_answer = request.POST.get(f'first_answer_{question.id}')
+            second_answer = request.POST.get(f'second_answer_{question.id}')
+            notes = request.POST.get(f'notes_{question.id}')
+
+            if first_answer:
+                choices = Choice.objects.filter(patient=patient, user=request.user, question=question).order_by('-id')
+
+                if choices.exists():
+                    # Εάν υπάρχουν επιλογές, πάρτε την τελευταία
+                    choice = choices.first()
+
+                      # Έλεγχος εάν έχει ήδη επεξεργαστεί
+                        # Αντικατάσταση των παλιών απαντήσεων με τις νέες
+                    choice.first_answer = first_answer
+                    choice.second_answer = second_answer
+                    choice.notes = notes
+                    choice.save()
+                    print('Αντικαταστάθηκαν οι παλιές απαντήσεις')
+
+                    
+                    continue
+
+                # Δημιουργία νέου Choice αν δεν υπάρχει
+                new_choice = Choice(
+                    question=question,
+                    user=request.user,
+                    patient=patient,
+                    first_answer=first_answer,
+                    second_answer=second_answer,
+                    notes=notes
+                )
+                new_choice.save()
+                print('Αποθηκεύτηκε νέα εγγραφή')
+
+
+        # Μπορείτε να προσθέσετε άλλα πεδία και επιλογές εδώ ανάλογα με τις ανάγκες σας.
+
+        return redirect('poll:submit_answers')
+        # for question in Question.objects.all():
+        #     first_answer = request.POST.get(f'first_answer_{question.id}')
+        #     second_answer = request.POST.get(f'second_answer_{question.id}')
+        #     notes = request.POST.get(f'notes_{question.id}')  # Λάβετε την απάντηση για κάθε ερώτηση
+        #     #print(first_answer)
+        #     #print(question.id)
+        #
+        #
+        #
+        #     if first_answer:
+        #         try:
+        #             choice = Choice.objects.filter(patient=patient, user=request.user, question=question.id)
+        #             print(choice)
+        #             if choice:
+        #                 choice.first_answer = first_answer
+        #                 choice.second_answer = second_answer
+        #                 choice.notes = notes
+        #                 choice.save()
+        #                 print('saved')
+        #
+        #
+        #         except ObjectDoesNotExist:
+        #             print('question_not_found')
+        #
+        #             choice = Choice(
+        #                 question=question,
+        #                 user=request.user,
+        #                 patient=patient,
+        #                 first_answer=first_answer,
+        #                 second_answer=second_answer,
+        #                 notes=notes
+        #             )
+        #             choice.save()
+        #             print('saved')
+        #
+        # # Μπορείτε να προσθέσετε άλλα πεδία και επιλογές εδώ ανάλογα με τις ανάγκες σας.
+        #
+        # return redirect('poll:submit_answers')  # Ανακατεύθυνση όπου επιθυμείτε μετά την επεξεργασία.

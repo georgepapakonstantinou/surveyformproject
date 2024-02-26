@@ -21,7 +21,10 @@ urlpatterns=[
     path('search_patients',views.search_patients, name='search_patients'),
     path('download_patient_choices_csv/<int:patient_id>/', views.download_patient_choices_csv, name='download_patient_choices_csv'),
     path('download_all', views.download_all, name='download_all'),
-    path('del_patient', views.del_patient, name='del_patient')
+    path('del_patient', views.del_patient, name='del_patient'),
+    path('edit_patient/<int:patient_id>/', views.edit_patient, name='edit_patient'),
+    path('update_answers/',views.update_answers,name='update_answers')
+
 
 
 ]
